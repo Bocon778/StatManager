@@ -23,7 +23,7 @@ namespace StatManager.Patches
                 yield return new WaitForSeconds(0.5f);
             }
 
-            if (!hasAppliedUpgrade && SemiFunc.RunIsLevel())
+            if (!hasAppliedUpgrade && SemiFunc.RunIsLevel() && SemiFunc.IsMasterClientOrSingleplayer())
             {
                 foreach (PlayerAvatar player in SemiFunc.PlayerGetAll())
                 {
@@ -57,6 +57,7 @@ namespace StatManager.Patches
                 hasAppliedUpgrade = true;
             }
         }
+
 
         [HarmonyPatch(typeof(RunManager), "ResetProgress")]
         class RunManagerResetPatch

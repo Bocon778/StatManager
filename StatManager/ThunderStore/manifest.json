@@ -1,7 +1,7 @@
 {
     "name": "StatManager",
     "description": "A mod for R.E.P.O. that assigns player upgrades.",
-    "version_number": "1.0.0",
+    "version_number": "1.1.0",
     "website_url": "https://github.com/Bocon778/StatManager/",
     "dependencies": ["BepInEx-BepInExPack-5.4.2100"]
   }
