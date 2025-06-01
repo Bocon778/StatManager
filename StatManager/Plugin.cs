@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -11,7 +11,7 @@ namespace StatManager
     {
         private const string modGUID = "Bocon.StatManager";
         private const string modeName = "Stat Manager";
-        private const string modVersion = "1.0.0";
+        private const string modVersion = "1.1.0";
 
         private const string ASCII_LOGO = @"
   _____ _        _     __  __                                   
