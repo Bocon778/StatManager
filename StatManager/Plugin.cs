@@ -11,18 +11,7 @@ namespace StatManager
     {
         private const string modGUID = "Bocon.StatManager";
         private const string modeName = "Stat Manager";
-        private const string modVersion = "1.1.0";
-
-        private const string ASCII_LOGO = @"
-  _____ _        _     __  __                                   
-  / ____| |      | |   |  \/  |                                  
- | (___ | |_ __ _| |_  | \  / | __ _ _ __   __ _  __ _  ___ _ __ 
-  \___ \| __/ _` | __| | |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__|
-  ____) | || (_| | |_  | |  | | (_| | | | | (_| | (_| |  __/ |   
- |_____/ \__\__,_|\__| |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
-                                                  __/ |          
-                                                 |___/           
-";
+        private const string modVersion = "1.2.0";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -39,6 +28,8 @@ namespace StatManager
         internal static ConfigEntry<int> GrabStrengthBonus;
         internal static ConfigEntry<int> GrabThrowBonus;
         internal static ConfigEntry<int> TumbleLaunchBonus;
+        internal static ConfigEntry<int> CrouchRestBonus;
+        internal static ConfigEntry <int> TumbleWingsBonus;
 
         void Awake()
         {
@@ -49,7 +40,7 @@ namespace StatManager
 
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
 
-            mls.LogInfo(ASCII_LOGO);
+            mls.LogInfo("Bocon.StatManager has loaded!");
 
             // Create configuration entries
             HealthBonus = Config.Bind("Stats", "Health", 10, "Amount of Health upgrades.");
@@ -61,6 +52,8 @@ namespace StatManager
             GrabStrengthBonus = Config.Bind("Stats", "Grab Strength", 5, "Amount of Grab Strength upgrades.");
             GrabThrowBonus = Config.Bind("Stats", "Grab Throw", 5, "Amount of Grab Throw upgrades.");
             TumbleLaunchBonus = Config.Bind("Stats", "Tumble Launch", 5, "Amount of Tumble Launch upgrades.");
+            CrouchRestBonus = Config.Bind("Stats", "Crouch Rest", 2, "Amount of Crouch rest upgrades.");
+            TumbleWingsBonus = Config.Bind("Stats", "Tumble Wings", 2, "Amount of Tubmle Wing upgrades.");
 
             harmony.PatchAll();
         }
