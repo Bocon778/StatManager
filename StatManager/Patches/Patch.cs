@@ -15,7 +15,6 @@ namespace StatManager.Patches
                 GameObject.FindObjectOfType<MonoBehaviour>().StartCoroutine(WaitForLevel());
             }
         }
-
         private static System.Collections.IEnumerator WaitForLevel()
         {
             while (!SemiFunc.LevelGenDone())
@@ -30,73 +29,56 @@ namespace StatManager.Patches
                     var steamId = SemiFunc.PlayerGetSteamID(player);
                     var upgrades = StatsManager.instance.FetchPlayerUpgrades(steamId);
 
-                    // Health
-                    int currentHealth = upgrades.ContainsKey("Health") ? upgrades["Health"] : 0;
-                    int healthToAdd = StatManager.HealthBonus.Value - currentHealth;
-                    for (int i = 0; i < healthToAdd; i++)
-                        PunManager.instance.UpgradePlayerHealth(steamId);
+                    int healthToAdd = StatManager.HealthBonus.Value - (upgrades.ContainsKey("Health") ? upgrades["Health"] : 0);
+                    if (healthToAdd != 0)
+                        PunManager.instance.UpgradePlayerHealth(steamId, healthToAdd);
 
-                    // Speed
-                    int currentSpeed = upgrades.ContainsKey("Speed") ? upgrades["Speed"] : 0;
-                    int speedToAdd = StatManager.SpeedBonus.Value - currentSpeed;
-                    for (int i = 0; i < speedToAdd; i++)
-                        PunManager.instance.UpgradePlayerSprintSpeed(steamId);
+                    int speedToAdd = StatManager.SpeedBonus.Value - (upgrades.ContainsKey("Speed") ? upgrades["Speed"] : 0);
+                    if (speedToAdd != 0)
+                        PunManager.instance.UpgradePlayerSprintSpeed(steamId, speedToAdd);
 
-                    // MapCount
-                    int currentMapCount = upgrades.ContainsKey("Map Player Count") ? upgrades["Map Player Count"] : 0;
-                    int mapCountToAdd = StatManager.MapCountBonus.Value - currentMapCount;
-                    for (int i = 0; i < mapCountToAdd; i++)
-                        PunManager.instance.UpgradeMapPlayerCount(steamId);
+                    int mapCountToAdd = StatManager.MapCountBonus.Value - (upgrades.ContainsKey("Map Player Count") ? upgrades["Map Player Count"] : 0);
+                    if (mapCountToAdd != 0)
+                        PunManager.instance.UpgradeMapPlayerCount(steamId, mapCountToAdd);
 
-                    // Energy (Stamina)
-                    int currentEnergy = upgrades.ContainsKey("Stamina") ? upgrades["Stamina"] : 0;
-                    int energyToAdd = StatManager.EnergyBonus.Value - currentEnergy;
-                    for (int i = 0; i < energyToAdd; i++)
-                        PunManager.instance.UpgradePlayerEnergy(steamId);
+                    int energyToAdd = StatManager.EnergyBonus.Value - (upgrades.ContainsKey("Stamina") ? upgrades["Stamina"] : 0);
+                    if (energyToAdd != 0)
+                        PunManager.instance.UpgradePlayerEnergy(steamId, energyToAdd);
 
-                    // ExtraJump
-                    int currentExtraJump = upgrades.ContainsKey("Extra Jump") ? upgrades["Extra Jump"] : 0;
-                    int extraJumpToAdd = StatManager.ExtraJumpBonus.Value - currentExtraJump;
-                    for (int i = 0; i < extraJumpToAdd; i++)
-                        PunManager.instance.UpgradePlayerExtraJump(steamId);
+                    int extraJumpToAdd = StatManager.ExtraJumpBonus.Value - (upgrades.ContainsKey("Extra Jump") ? upgrades["Extra Jump"] : 0);
+                    if (extraJumpToAdd != 0)
+                        PunManager.instance.UpgradePlayerExtraJump(steamId, extraJumpToAdd);
 
-                    // GrabRange
-                    int currentGrabRange = upgrades.ContainsKey("Range") ? upgrades["Range"] : 0;
-                    int grabRangeToAdd = StatManager.GrabRangeBonus.Value - currentGrabRange;
-                    for (int i = 0; i < grabRangeToAdd; i++)
-                        PunManager.instance.UpgradePlayerGrabRange(steamId);
+                    int grabRangeToAdd = StatManager.GrabRangeBonus.Value - (upgrades.ContainsKey("Range") ? upgrades["Range"] : 0);
+                    if (grabRangeToAdd != 0)
+                        PunManager.instance.UpgradePlayerGrabRange(steamId, grabRangeToAdd);
 
-                    // GrabStrength
-                    int currentGrabStrength = upgrades.ContainsKey("Strength") ? upgrades["Strength"] : 0;
-                    int grabStrengthToAdd = StatManager.GrabStrengthBonus.Value - currentGrabStrength;
-                    for (int i = 0; i < grabStrengthToAdd; i++)
-                        PunManager.instance.UpgradePlayerGrabStrength(steamId);
+                    int grabStrengthToAdd = StatManager.GrabStrengthBonus.Value - (upgrades.ContainsKey("Strength") ? upgrades["Strength"] : 0);
+                    if (grabStrengthToAdd != 0)
+                        PunManager.instance.UpgradePlayerGrabStrength(steamId, grabStrengthToAdd);
 
-                    // GrabThrow
-                    int currentGrabThrow = upgrades.ContainsKey("Throw") ? upgrades["Throw"] : 0;
-                    int grabThrowToAdd = StatManager.GrabThrowBonus.Value - currentGrabThrow;
-                    for (int i = 0; i < grabThrowToAdd; i++)
-                        PunManager.instance.UpgradePlayerThrowStrength(steamId);
+                    int tumbleLaunchToAdd = StatManager.TumbleLaunchBonus.Value - (upgrades.ContainsKey("Launch") ? upgrades["Launch"] : 0);
+                    if (tumbleLaunchToAdd != 0)
+                        PunManager.instance.UpgradePlayerTumbleLaunch(steamId, tumbleLaunchToAdd);
 
-                    // TumbleLaunch
-                    int currentTumbleLaunch = upgrades.ContainsKey("Launch") ? upgrades["Launch"] : 0;
-                    int tumbleLaunchToAdd = StatManager.TumbleLaunchBonus.Value - currentTumbleLaunch;
-                    for (int i = 0; i < tumbleLaunchToAdd; i++)
-                        PunManager.instance.UpgradePlayerTumbleLaunch(steamId);
+                    int crouchRestToAdd = StatManager.CrouchRestBonus.Value - (upgrades.ContainsKey("Crouch Rest") ? upgrades["Crouch Rest"] : 0);
+                    if (crouchRestToAdd != 0)
+                        PunManager.instance.UpgradePlayerCrouchRest(steamId, crouchRestToAdd);
 
-                    // Crouch Rest
-                    int currentCrouchRest = upgrades.ContainsKey("Crouch Rest") ? upgrades["Crouch Rest"] : 0;
-                    int crouchRestToAdd = StatManager.CrouchRestBonus.Value - currentCrouchRest;
-                    for (int i = 0; i < crouchRestToAdd; i++)
-                        PunManager.instance.UpgradePlayerCrouchRest(steamId);
+                    int tumbleWingsToAdd = StatManager.TumbleWingsBonus.Value - (upgrades.ContainsKey("Tumble Wings") ? upgrades["Tumble Wings"] : 0);
+                    if (tumbleWingsToAdd != 0)
+                        PunManager.instance.UpgradePlayerTumbleWings(steamId, tumbleWingsToAdd);
 
-                    // Tumble Wings
-                    int currentTumbleWings = upgrades.ContainsKey("Tumble Wings") ? upgrades["Tumble Wings"] : 0;
-                    int tumbleWingsToAdd = StatManager.TumbleWingsBonus.Value - currentTumbleWings;
-                    for (int i = 0; i < tumbleWingsToAdd; i++)
-                        PunManager.instance.UpgradePlayerTumbleWings(steamId);
+                    int tumbleClimbToAdd = StatManager.TumbleClimbBonus.Value - (upgrades.ContainsKey("Tumble Climb") ? upgrades["Tumble Climb"] : 0);
+                    if (tumbleClimbToAdd != 0)
+                        PunManager.instance.UpgradePlayerTumbleClimb(steamId, tumbleClimbToAdd);
 
+                    int deathHeadToAdd = StatManager.DeathHeadBonus.Value - (upgrades.ContainsKey("Death Head") ? upgrades["Death Head"] : 0);
+                    if (deathHeadToAdd != 0)
+                        PunManager.instance.UpgradeDeathHeadBattery(steamId, deathHeadToAdd);
                 }
+
+
                 hasAppliedUpgrade = true;
             }
         }
